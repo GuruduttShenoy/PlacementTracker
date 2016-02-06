@@ -68,8 +68,11 @@ namespace PlacementTracker.Controllers
         // Update PUT
         public List<Employee> Put(Employee obj)
         {
-            
             EmployeeEntities empObj = new EmployeeEntities();
+
+            if (obj!=null && obj.EmployeeID!=0)
+            { 
+           
             // Select the record ( LINQ )
             Employee empUpdate = (from temp in empObj.Employees
                                    where temp.EmployeeID == obj.EmployeeID
@@ -85,6 +88,8 @@ namespace PlacementTracker.Controllers
 
             empObj.SaveChanges();
 
+            }
+
             List<Employee> empList = empObj.Employees.ToList<Employee>();
 
             return empList;
@@ -94,8 +99,11 @@ namespace PlacementTracker.Controllers
         // Delete Delete
         public List<Employee> Delete(Employee obj)
         {
-            // Delete
             EmployeeEntities empObj = new EmployeeEntities();
+            if (obj!=null && obj.EmployeeID!=0)
+            { 
+            // Delete
+            
 
             Employee empDelete = (from temp in empObj. Employees
                                    where temp.EmployeeID == obj.EmployeeID
@@ -104,6 +112,8 @@ namespace PlacementTracker.Controllers
             empObj.Employees.Remove(empDelete); // changes still inside memory
 
             empObj.SaveChanges();// Physical commit
+
+            }
 
             List<Employee> empList = empObj.Employees.ToList<Employee>();
 

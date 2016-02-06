@@ -6,7 +6,8 @@
         "Age": "",
         "Address": "",
         "Active": "",
-        "ActiveFlag":"",
+        "ActiveFlag": "",
+        "ActiveStatus":"",
         "Employment": "",
         "EmploymentType":""
     };
@@ -22,6 +23,16 @@
             var emp = $scope.Employees[x];
             emp.ActiveFlag = $scope.getColor(emp.Active);
             emp.EmploymentType = $scope.getEmploymentType(emp.Employment);
+
+            if (emp.Active == 0)
+            {
+                emp.ActiveStatus = "InActive";
+            }
+            else
+            {
+                emp.ActiveStatus = "Active";
+            }
+            
         }
     });
 
@@ -81,7 +92,8 @@
                     "Active": "",
                     "ActiveFlag":"",
                     "EmploymentType": "",
-                    "Employment":""
+                    "Employment": "",
+                    "ActiveStatus":""
                 };
             });
     }
@@ -99,7 +111,8 @@
                     "Active": "",
                     "ActiveFlag": "",
                     "EmploymentType": "",
-                    "Employment": ""
+                    "Employment": "",
+                    "ActiveStatus": ""
                 };
             });
     }
@@ -120,7 +133,8 @@
                     "Active": "",
                     "ActiveFlag": "",
                     "EmploymentType": "",
-                    "Employment": ""
+                    "Employment": "",
+                    "ActiveStatus": ""
 
                 };
             });
@@ -158,6 +172,7 @@
             "Active": data[0].Active,
             "Employment": data[0].Employment
         };
+        $scope.Load();
 
     });
 

@@ -20,6 +20,8 @@
     <script src="~/Scripts/EmployeeViewModel.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
 </head>
 
 
@@ -35,7 +37,7 @@
 
 
     <br />
-    <div>
+    <div class="container">
         <div ng-controller="EmployeeViewModel">
             <form id="frm1">
                 <label>Employee ID</label> <input id="txtEmpId" required autofocus pattern="^(0-9)$" ng-model="Employee.EmployeeID" type="text" name="Employee.EmployeeID" /><br />
@@ -49,16 +51,16 @@
                 <br/>
 
                 <label>Address</label> <input id="txtAddress" ng-model="Employee.Address" type="text" name="Employee.Address" /><br />
-
+                <br/>
                 <label>Active</label>
                 <div class="empRadio">
                     <label>
-                        <input type="radio" ng-model="Employee.Active" value="1" />
+                        <input  type="radio" ng-model="Employee.Active" value="1" />
                         Yes
                     </label>
 
                     <label>
-                        <input type="radio" ng-model="Employee.Active" value="0" />
+                        <input  type="radio" ng-model="Employee.Active" value="0" />
                         No
                     </label><br />
                 </div>
@@ -87,33 +89,45 @@
                  
             </form>
             <br/>
-            <input name="btnSubmit" id="btnSubmit" type="button" value="Add Employee" ng-click="Add()" />
-            <input name="btnUpdate" id="btnUpdate" type="button" value="Update Employee" ng-click="Update()" />
-            <input name="btnDelete" id="btnDelete" type="button" value="Delete Employee" ng-click="Delete()" />
+            <div class="container">
+                <input name="btnSubmit" type="button" class="btn btn-success" id="btnSubmit" value="Add Employee" ng-click="Add()" />
+                <input name="btnUpdate" type="button" class="btn btn-primary" id="btnUpdate"  value="Update Employee" ng-click="Update()" />
+                <input name="btnDelete" type="button" class="btn btn-danger" id="btnDelete"  value="Delete Employee" ng-click="Delete()" />
+            </div>
             <br />
             <br/>
-            <div>
-                <table id="tbl">
-                    <tr>
-                        <td>Employee ID</td>
-                        <td>Employee Name</td>
-                        <td>Age</td>
-                        <td>Address</td>
-                        <td>Employment Type</td>
-                        <td>Status</td>
-                    </tr>
-                    <tr ng-repeat="emp in Employees">
-                        <td>{{emp.EmployeeID}}</td>
-                        <td>{{emp.Name}}</td>
-                        <td>{{emp.Age}}</td>
-                        <td>{{emp.Address}}</td>
-                        <td>{{emp.EmploymentType}}</td>
-                        <td style="background-color:{{emp.ActiveFlag}}">
-                         {{emp.Active}}
-                        </td>
+            <div class="container">
+                <table class="table table-bordered table-hover table-responsive table-condensed">
+                    <thead>
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Employee Name</th>
+                            <th>Age</th>
+                            <th>Address</th>
+                            <th>Employment Type</th>
+                            <th>Status</th>
 
-                        <td><a ng-click="LoadByCode(emp.EmployeeID)" href="#">Select To Modify</a></td>
-                    </tr>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="emp in Employees">
+                            <td>{{emp.EmployeeID}}</td>
+                            <td>{{emp.Name}}</td>
+                            <td>{{emp.Age}}</td>
+                            <td>{{emp.Address}}</td>
+                            <td>{{emp.EmploymentType}}</td>
+                            <td style="background-color:{{emp.ActiveFlag}}">
+                                {{emp.ActiveStatus}}
+                            </td>
+
+                            <td><a ng-click="LoadByCode(emp.EmployeeID)" href="#">Select To Modify</a></td>
+                        </tr>
+
+                    </tbody>
+                  
+                    
                 </table>
             </div>
 
