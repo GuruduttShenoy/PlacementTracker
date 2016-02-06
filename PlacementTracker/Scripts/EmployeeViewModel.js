@@ -11,6 +11,12 @@
         "Employment": "",
         "EmploymentType":""
     };
+    //pattern to validate the employee id
+    $scope.IDPattern = /[0-9]{1,10}/;
+    //pattern to validate the employee name
+    $scope.NamePattern = /[A-Za-z]{2,15}/;
+    //pattern to validate employee age
+    $scope.AgePattern = /[1-9]{1,2}/;
 
     //Initializing the Employee List in which the resultant of all calls will be stored
     $scope.Employees = {};
@@ -34,6 +40,7 @@
             }
             
         }
+
     });
 
 
@@ -95,7 +102,11 @@
                     "Employment": "",
                     "ActiveStatus":""
                 };
+                $scope.Load();
             });
+
+        
+        
     }
     $scope.Update = function () {
         // make a call to server to add data
@@ -114,6 +125,8 @@
                     "Employment": "",
                     "ActiveStatus": ""
                 };
+                $scope.Load();
+
             });
     }
     $scope.Delete = function () {
@@ -137,6 +150,7 @@
                     "ActiveStatus": ""
 
                 };
+                $scope.Load();
             });
     }
     $scope.Load = function () {

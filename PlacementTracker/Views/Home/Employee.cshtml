@@ -13,7 +13,7 @@
     <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/jquery.validate.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
-    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
     <script src="~/Scripts/EmployeeViewModel.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link href="~/Content/Site.css" rel="stylesheet" />
@@ -36,15 +36,21 @@
     <br />
     <div class="container">
         <div ng-controller="EmployeeViewModel">
-            <form id="frm1">
-                <label>Employee ID</label> <input id="txtEmpId" required autofocus pattern="^(0-9)$" ng-model="Employee.EmployeeID" type="text" name="Employee.EmployeeID" /><br />
-                @Html.ValidationMessageFor(x => x.employee.EmployeeID)<br />
-
-                <label>Employee Name</label> <input id="txtEmpName" required ng-model="Employee.Name" type="text" name="Employee.Name" /> <br />
-                @Html.ValidationMessageFor(x => x.employee.Name)<br />
-
-                <label>Age</label> <input id="txtAge" ng-model="Employee.Age" type="text" name="Employee.Age" />
+            <form id="myFrm" name="myFrm">
+                <label>Employee ID</label> <input id="txtEmpId" autofocus required  ng-model="Employee.EmployeeID" type="text" name="EmployeeID" />
+                <br/>
+                <span ng-show="myFrm.EmployeeID.$touched && myFrm.EmployeeID.$invalid" style="color:darkred">Please enter a valid ID</span>
                 <br />
+                <label>Employee Name</label> <input id="txtEmpName"  ng-model="Employee.Name" ng-pattern="NamePattern" type="text" name="Name" required />
+               <br />
+                <span ng-show="myFrm.Name.$touched && myFrm.Name.$invalid" style="color:darkred">Please enter a valid Name</span>
+                <br/>
+
+                    <label>Age</label> <input id="txtAge" ng-pattern="AgePattern" ng-model="Employee.Age" type="text" name="Age"/><br />
+
+                    <span ng-show="myFrm.Age && myFrm.Age.$invalid" style="color:darkred">Please enter a valid Age</span>
+
+
                 <br/>
 
                 <label>Address</label> <input id="txtAddress" ng-model="Employee.Address" type="text" name="Employee.Address" /><br />
@@ -87,7 +93,7 @@
             </form>
             <br/>
             <div class="container">
-                <input name="btnSubmit" type="button" class="btn btn-success" id="btnSubmit" value="Add Employee" ng-click="Add()" />
+                <input name="btnSubmit" ng-disabled="!myFrm.$valid" type="button" class="btn btn-success" id="btnSubmit" value="Add Employee" ng-click="Add()" />
                 <input name="btnUpdate" type="button" class="btn btn-primary" id="btnUpdate"  value="Update Employee" ng-click="Update()" />
                 <input name="btnDelete" type="button" class="btn btn-danger" id="btnDelete"  value="Delete Employee" ng-click="Delete()" />
             </div>

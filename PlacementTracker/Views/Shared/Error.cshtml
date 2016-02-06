@@ -1,9 +1,25 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 @{
-    ViewBag.Title = "Error";
+    
 }
+<html>
+<head>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+</head>
+<body>
+    <div class="container">
+
+        <div class="alert alert-danger">
+            <strong>Something went wrong while processing your request !</strong>
+            Please try again
+        </div>
+    </div>
+
+</body>
+</html>
+
+
 

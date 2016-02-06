@@ -43,5 +43,18 @@ label
     left: 30px;
 }
 
+span
+{
+    position: absolute;
+    right: 100px;
+    left:250px;
+}
+
+/*input.ng-invalid {
+    background-color:pink;
+}
+input.ng-valid {
+    background-color:green;
+}*/
 
 

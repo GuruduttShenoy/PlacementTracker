@@ -5,9 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using PlacementTracker.Models;
+using System.Web.Mvc;
 
 namespace PlacementTracker.Controllers
 {
+    [HandleError]
     public class EmployeeController : ApiController
     {
         // Insert
@@ -18,6 +20,11 @@ namespace PlacementTracker.Controllers
             if (ModelState.IsValid)
             {
                 // insert the customer object to database
+
+                //Gets the max value of emp id
+                int maxEmpId = empObj.Employees.Max<Employee>(x => x.EmployeeID);
+                //makes sure that the emp id is unique and in order
+                obj.EmployeeID = maxEmpId + 1;
 
                 empObj.Employees.Add(obj); // Still in memory, not committed
 
@@ -76,10 +83,11 @@ namespace PlacementTracker.Controllers
             // Select the record ( LINQ )
             Employee empUpdate = (from temp in empObj.Employees
                                    where temp.EmployeeID == obj.EmployeeID
-                                   select temp).ToList<Employee>()[0];
+                                   select temp).ToList<Employee>().SingleOrDefault<Employee>();
 
             //Updates the details as per the details from the front page
-
+            if(empUpdate!=null)
+            { 
             empUpdate.Name = obj.Name;
             empUpdate.Age = obj.Age;
             empUpdate.Address = obj.Address;
@@ -87,6 +95,8 @@ namespace PlacementTracker.Controllers
             empUpdate.Employment = obj.Employment;
 
             empObj.SaveChanges();
+            }
+
 
             }
 
