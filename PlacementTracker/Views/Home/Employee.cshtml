@@ -1,0 +1,131 @@
+﻿@model PlacementTracker.ViewModel.EmployeeViewModel
+
+@using PlacementTracker.Models
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EnterCustomer</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/EmployeeViewModel.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+
+
+<body ng-app="myApp">
+
+    <script language="javascript">
+
+    var app = angular.module("myApp", []); // creating a APP
+
+    app.controller("EmployeeViewModel", EmployeeViewModel); // Registering the VM
+    // Controller
+    </script>
+
+
+    <br />
+    <div>
+        <div ng-controller="EmployeeViewModel">
+            <form id="frm1">
+                <label>Employee ID</label> <input id="txtEmpId" required autofocus pattern="^(0-9)$" ng-model="Employee.EmployeeID" type="text" name="Employee.EmployeeID" /><br />
+                @Html.ValidationMessageFor(x => x.employee.EmployeeID)<br />
+
+                <label>Employee Name</label> <input id="txtEmpName" required ng-model="Employee.Name" type="text" name="Employee.Name" /> <br />
+                @Html.ValidationMessageFor(x => x.employee.Name)<br />
+
+                <label>Age</label> <input id="txtAge" ng-model="Employee.Age" type="text" name="Employee.Age" />
+                <br />
+                <br/>
+
+                <label>Address</label> <input id="txtAddress" ng-model="Employee.Address" type="text" name="Employee.Address" /><br />
+
+                <label>Active</label>
+                <div class="empRadio">
+                    <label>
+                        <input type="radio" ng-model="Employee.Active" value="1" />
+                        Yes
+                    </label>
+
+                    <label>
+                        <input type="radio" ng-model="Employee.Active" value="0" />
+                        No
+                    </label><br />
+                </div>
+                <br/>
+
+
+             <label> Type of employment </label>
+            <br/>
+                <div class="empRadio">
+                    <label>
+                        <input type="radio" ng-model="Employee.Employment" value="0" />
+                        None
+                    </label><br />
+
+                    <label>
+                        <input type="radio" ng-model="Employee.Employment" value="1" />
+                        Permanent
+                    </label><br />
+                    <label>
+                        <input type="radio" ng-model="Employee.Employment" value="2" />
+                        Contract
+                    </label>
+                </div>
+
+
+                 
+            </form>
+            <br/>
+            <input name="btnSubmit" id="btnSubmit" type="button" value="Add Employee" ng-click="Add()" />
+            <input name="btnUpdate" id="btnUpdate" type="button" value="Update Employee" ng-click="Update()" />
+            <input name="btnDelete" id="btnDelete" type="button" value="Delete Employee" ng-click="Delete()" />
+            <br />
+            <br/>
+            <div>
+                <table id="tbl">
+                    <tr>
+                        <td>Employee ID</td>
+                        <td>Employee Name</td>
+                        <td>Age</td>
+                        <td>Address</td>
+                        <td>Employment Type</td>
+                        <td>Status</td>
+                    </tr>
+                    <tr ng-repeat="emp in Employees">
+                        <td>{{emp.EmployeeID}}</td>
+                        <td>{{emp.Name}}</td>
+                        <td>{{emp.Age}}</td>
+                        <td>{{emp.Address}}</td>
+                        <td>{{emp.EmploymentType}}</td>
+                        <td style="background-color:{{emp.ActiveFlag}}">
+                         {{emp.Active}}
+                        </td>
+
+                        <td><a ng-click="LoadByCode(emp.EmployeeID)" href="#">Select To Modify</a></td>
+                    </tr>
+                </table>
+            </div>
+
+            @*@{
+                WebGrid obj = new WebGrid(Model.employees);
+            }
+            @obj.GetHtml();*@
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
